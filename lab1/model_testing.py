@@ -22,3 +22,12 @@ scoring = {'R2': 'r2',
            }
 
 scores = cross_validate(model, X_train, y_train, scoring = scoring,
+                       cv= ShuffleSplit(n_splits=5, random_state=42)
+                       )) 
+DF_cv_kNN = pd.DataFrame(scores)
+
+print('\nОшибка на тестовых данных\n')
+ 
+print('MSE: %.5f' % mse(y_test, y_predict))
+print('RME: %.5f' % mse(y_test, y_predict, squared=False))
+print('R2: %.5f' % r2_score(y_test, y_predict))
